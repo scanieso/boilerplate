@@ -1,0 +1,32 @@
+// CSS3
+// ---------------------------------------
+
+@mixin opacity ($value) {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$value * 100})";
+  filter: alpha(opacity=#{$value * 100});
+  opacity: $value;
+}
+
+// Helpers
+// ---------------------------------------
+
+@mixin font-size ($size: 14, $parentSize: 16) {
+  font-size: $size + 0px;
+  font-size: 0rem + $size/$parentSize;
+}
+
+@mixin retina () {
+  @media (min--moz-device-pixel-ratio: 1.5),
+         (-o-min-device-pixel-ratio: 3/2),
+         (-webkit-min-device-pixel-ratio: 1.5),
+         (min-device-pixel-ratio: 1.5),
+         (min-resolution: 144dpi),
+         (min-resolution: 1.5dppx) {
+    @content;
+  }
+}
+
+@mixin size ($width, $height: $width) {
+  height: $height + 0px;
+  width: $width + 0px;
+}

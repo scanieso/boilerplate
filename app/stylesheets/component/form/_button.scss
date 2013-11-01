@@ -1,0 +1,40 @@
+button {
+  font-family: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+.button {
+  @extend %inline-block;
+  @include box-sizing(border-box);
+  @include font-size(14);
+  @include transition(background 0.2s);
+  background: $color-primary;
+  border: 0;
+  border-radius: $page-border-radius;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  margin: 0;
+  padding: 4px 10px;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  white-space: nowrap;
+
+  &:hover {
+    background: lighten($color-primary, 10%);
+    text-decoration: none;
+  }
+
+  &:active {
+    box-shadow: inset 0 2px 5px rgba(#000, 0.1);
+  }
+
+  &.disabled,
+  &[disabled] {
+    @include opacity(0.3);
+    background: $color-primary;
+    cursor: default;
+  }
+}

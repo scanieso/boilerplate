@@ -1,0 +1,48 @@
+// Colors
+// ---------------------------------------
+
+$blue: #59b5e7;
+$blue-light: #DEF4FF;
+$blue-lighter: #ECF9FF;
+$green: #D1E886;
+$green-dark: #99CB00;
+$green-light: #EFF7D5;
+$orange: #FFBB33;
+$red: #FF4444;
+$red-dark: darken(#FF4444, 20%);
+$red-light: lighten(#FF4444, 10%);
+$purple: #36193e;
+$yellow: #FFE38B;
+$yellow-dark: #FFBB33;
+$yellow-light: #FFFAE6;
+
+$gray-darkest: #65666e;
+$gray-darker: #717883;
+$gray-dark: darken(#93a1a7, 5%);
+$gray: #e3e5e6;
+$gray-light: #f1f2f3;
+$gray-lighter: #F8F8F8;
+
+$color-body: darken($gray-darker, 10%);
+$color-primary: $blue;
+$color-primary-light: $blue-light;
+$color-primary-lighter: $blue-lighter;
+$color-secondary: $green;
+$color-secondary-dark: $green-dark;
+$color-secondary-light: $green-light;
+
+
+// Fonts
+// ---------------------------------------
+
+$font-stack: 'Helvetica Neue', 'Arial', sans-serif;
+$font-primary: 'Open Sans', $font-stack;
+
+
+// Misc
+// ---------------------------------------
+
+$page-border-radius: 3px;
+$page-h-rhythm: 20px;
+$page-v-rhythm: 20px;
+$page-width: 960px;
