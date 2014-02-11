@@ -22,7 +22,8 @@ button {
   -webkit-font-smoothing: antialiased;
   white-space: nowrap;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: lighten($color-primary, 10%);
     text-decoration: none;
   }

@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     destPath = 'public/',
     javascripts = sourcePath + 'javascripts/**/*.js',
     stylesheets = sourcePath + 'stylesheets/**/*.scss',
-    icons = sourcePath + 'svg/icons/**/*.svg',
+    icons = sourcePath + 'svg/**/*.svg',
     images = sourcePath + 'images/**/*.{jpg,gif,png}';
 
   grunt.initConfig({
@@ -60,7 +60,8 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          style: 'nested'
+          style: 'nested',
+          quiet: true
         },
         files: {
           "<%= destPath + 'assets/css/styles.css' %>": "<%= sourcePath + 'stylesheets/styles.scss' %>"
@@ -214,11 +215,18 @@ module.exports = function (grunt) {
       }
     },
 
+    'gh-pages': {
+      options: {
+        base: 'public'
+      },
+      src: ['**']
+    },
+
     webfont: {
       icons: {
         src: icons,
         dest: destPath + 'assets/fonts/icons',
-        destCss: sourcePath + 'css/generated',
+        destCss: sourcePath + 'stylesheets/generated',
         options: {
           font: 'icons',
           htmlDemo: false,
@@ -230,13 +238,23 @@ module.exports = function (grunt) {
     },
 
     watch: {
+      options: {
+        livereload: true
+      },
       scripts: {
         files: javascripts,
         tasks: ['jshint', 'concat']
       },
       sass: {
+        options: {
+          livereload: false
+        },
         files: stylesheets,
         tasks: ['sass:dev', 'dist_css']
+      },
+      css: {
+        files: destPath + 'assets/**/*.css',
+        tasks: []
       },
       jekyll: {
         files: [

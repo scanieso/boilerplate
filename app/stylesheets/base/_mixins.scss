@@ -7,12 +7,45 @@
   opacity: $value;
 }
 
+@mixin placeholder () {
+  ::-webkit-input-placeholder {
+    @content
+  }
+  :-moz-placeholder {
+    @content
+  }
+  ::-moz-placeholder {
+    @content
+  }
+  :-ms-input-placeholder {
+    @content
+  }
+}
+
 // Helpers
 // ---------------------------------------
 
 @mixin font-size ($size: 14, $parentSize: 16) {
   font-size: $size + 0px;
   font-size: 0rem + $size/$parentSize;
+}
+
+@mixin hidden () {
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
+}
+
+@mixin image-replaced {
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+@mixin list-clean () {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 @mixin retina () {
@@ -29,4 +62,18 @@
 @mixin size ($width, $height: $width) {
   height: $height + 0px;
   width: $width + 0px;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin vertical-rhythm ($value: $page-v-rhythm) {
+  margin-top: $value + 0px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
