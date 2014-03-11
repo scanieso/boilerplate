@@ -2,7 +2,7 @@
 // ---------------------------------------
 
 h1, h2, h3, h4, h5, h6 {
-  @extend %v-rhythm;
+  @include vertical-rhythm;
 }
 
 h1 {
@@ -31,7 +31,7 @@ h6 {
 
 ul,
 ol {
-  @extend %v-rhythm;
+  @include vertical-rhythm;
   line-height: 1.7;
   margin-left: 20px;
   padding-left: 20px;
@@ -54,7 +54,7 @@ ol {
 }
 
 p {
-  @extend %v-rhythm;
+  @include vertical-rhythm;
   line-height: 1.7;
 }
 

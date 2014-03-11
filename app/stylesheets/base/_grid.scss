@@ -16,7 +16,7 @@ $grid-classes: ();
 }
 
 .row {
-  @extend %v-rhythm;
+  @include vertical-rhythm;
   @include clearfix;
   margin-left: -$grid-spacing;
 

@@ -11,6 +11,8 @@ module.exports = function (grunt) {
     images = sourcePath + 'images/**/*.{jpg,gif,png}';
 
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
     destPath: destPath,
     sourcePath: sourcePath,
 
@@ -66,21 +68,14 @@ module.exports = function (grunt) {
         files: {
           "<%= destPath + 'assets/css/styles.css' %>": "<%= sourcePath + 'stylesheets/styles.scss' %>"
         }
-      }
-    },
-
-    cmq: {
-      dist: {
+      },
+      min: {
+        options: {
+          style: 'compressed',
+          quiet: true
+        },
         files: {
-          'public/assets/css/': "<%= destPath + 'assets/css/styles.css' %>"
-        }
-      }
-    },
-
-    cssmin: {
-      dist: {
-        files: {
-          "<%= destPath + 'assets/css/styles.min.css' %>": "<%= destPath + 'assets/css/styles.css' %>"
+          "<%= destPath + 'assets/css/styles.min.css' %>": "<%= sourcePath + 'stylesheets/styles.scss' %>"
         }
       }
     },
@@ -115,42 +110,6 @@ module.exports = function (grunt) {
     },
 
     responsive_images: {
-      touch_icon: {
-        options: {
-          separator: '-',
-          sizes: [{
-            name: '152x152-precomposed',
-            width: 152
-          },{
-            name: '144x144-precomposed',
-            width: 144
-          },{
-            name: '120x120-precomposed',
-            width: 120
-          },{
-            name: '114x114-precomposed',
-            width: 114
-          },{
-            name: '76x76-precomposed',
-            width: 76
-          },{
-            name: '72x72-precomposed',
-            width: 72
-          },{
-            name: '57x57-precomposed',
-            width: 57
-          },{
-            name: 'precomposed',
-            width: 57
-          }]
-        },
-        files: [{
-          expand: true,
-          src: ['*.{jpg,gif,png}'],
-          cwd: sourcePath + 'images/icons/',
-          dest: destPath + 'assets/'
-        }]
-      },
       responsive: {
         options: {
           separator: '_',
@@ -204,14 +163,6 @@ module.exports = function (grunt) {
           src: ['**/*.html'],
           dest: destPath
         }]
-      },
-      responsive_images: {
-        files: [{
-          expand: true,
-          cwd: sourcePath + 'images/responsive/',
-          src: ['*.{jpg,gif,png}'],
-          dest: destPath + 'assets/images/content/'
-        }]
       }
     },
 
@@ -220,6 +171,29 @@ module.exports = function (grunt) {
         base: 'public'
       },
       src: ['**']
+    },
+
+    secret: grunt.file.readJSON('secret.json'),
+
+    sftp: {
+      test: {
+        files: {
+          './': [
+            'public/**/*.html'
+          ]
+        },
+        options: {
+          path: '/sandbox.ftsdesign.com/web/content/grunt/',
+          host: '<%= secret.host %>',
+          username: '<%= secret.username %>',
+          password: '<%= secret.password %>',
+          minimatch: {
+            noglobstar: false
+          },
+          showProgress: true,
+          srcBasePath: 'public/'
+        }
+      }
     },
 
     webfont: {
@@ -250,7 +224,7 @@ module.exports = function (grunt) {
           livereload: false
         },
         files: stylesheets,
-        tasks: ['sass:dev', 'dist_css']
+        tasks: ['sass']
       },
       css: {
         files: destPath + 'assets/**/*.css',
@@ -275,10 +249,6 @@ module.exports = function (grunt) {
         files: sourcePath + 'images/responsive/**/*.{jpg,gif,png}',
         tasks: ['responsive_images', 'copy:responsive_images', 'imagemin:responsive_images']
       }
-    },
-
-    concurrent: {
-      dev: ['jekyll', 'sass:dev', 'htmllint']
     }
   });
 
@@ -286,15 +256,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dev', [
     'jshint',
-    'concurrent',
     'copy:jekyll',
     'htmllint'
-  ]);
-
-  grunt.registerTask('dist_css', [
-    'sass:dist',
-    'cmq',
-    'cssmin'
   ]);
 
   grunt.registerTask('touch_icon', [

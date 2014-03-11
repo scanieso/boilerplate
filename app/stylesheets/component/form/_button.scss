@@ -4,7 +4,7 @@ button {
 }
 
 .button {
-  @extend %inline-block;
+  @include inline-block;
   @include box-sizing(border-box);
   @include font-size(14);
   @include transition(background 0.2s);
