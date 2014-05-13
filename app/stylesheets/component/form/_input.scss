@@ -1,12 +1,12 @@
 .input-text,
 #{$all-text-inputs},
 textarea {
-  @include inline-block;
   @include box-sizing(border-box);
   @include transition(all 0.2s);
-  border: 1px solid darken($gray, 10%);
+  border: 1px solid $gray;
   border-radius: $page-border-radius;
   color: inherit;
+  display: inline-block;
   font-family: inherit;
   font-size: 100%;
   margin: 0;
@@ -16,14 +16,13 @@ textarea {
   width: 100%;
 
   &:focus {
-    background-color: $color-primary-light;
-    border-color: $color-primary;
+    box-shadow: 0 0 3px $gray;
     outline: none;
   }
 
   &[disabled] {
-    border-color: $gray-light;
     color: $gray;
+    opacity: 0.5;
   }
 }
 

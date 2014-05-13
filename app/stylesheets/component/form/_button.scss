@@ -1,10 +1,10 @@
 button {
   font-family: inherit;
+  font-size: inherit;
   -webkit-font-smoothing: antialiased;
 }
 
 .button {
-  @include inline-block;
   @include box-sizing(border-box);
   @include font-size(14);
   @include transition(background 0.2s);
@@ -13,6 +13,7 @@ button {
   border-radius: $page-border-radius;
   color: #fff;
   cursor: pointer;
+  display: inline-block;
   font-family: inherit;
   font-weight: bold;
   margin: 0;

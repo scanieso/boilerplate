@@ -70,10 +70,16 @@
   white-space: nowrap;
 }
 
-@mixin vertical-rhythm ($value: $page-v-rhythm) {
+@mixin vertical-rhythm ($value: $spacing-vertical) {
   margin-top: $value + 0px;
 
   &:first-child {
     margin-top: 0;
   }
+}
+
+@mixin visible () {
+  left: auto;
+  position: static;
+  top: auto;
 }

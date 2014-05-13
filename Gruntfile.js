@@ -173,13 +173,13 @@ module.exports = function (grunt) {
       src: ['**']
     },
 
-    secret: grunt.file.readJSON('secret.json'),
+    secret: grunt.file.exists('secret.json') ? grunt.file.readJSON('secret.json') : {},
 
     sftp: {
       test: {
         files: {
           './': [
-            'public/**/*.html'
+            'public/**'
           ]
         },
         options: {
@@ -259,8 +259,4 @@ module.exports = function (grunt) {
     'copy:jekyll',
     'htmllint'
   ]);
-
-  grunt.registerTask('touch_icon', [
-    'responsive_images:touch_icon'
-    ]);
 };
