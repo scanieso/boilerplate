@@ -29,8 +29,8 @@ Front-end boilerplate for new projects.
 
 Uses [Gruntjs](http://gruntjs.com/). Default task runs `watch`.
 
-  $ npm install
-  $ grunt
+    $ npm install
+    $ grunt
 
 ### Dependencies
 

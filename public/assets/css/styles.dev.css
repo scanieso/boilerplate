@@ -375,7 +375,7 @@ p:first-child {
 /* line 59, ../../../app/stylesheets/base/_typography.scss */
 a {
   background: transparent;
-  color: blue;
+  color: darkturquoise;
   text-decoration: none;
 }
 /* line 64, ../../../app/stylesheets/base/_typography.scss */
@@ -460,7 +460,7 @@ button {
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
   transition: background 0.2s;
-  background: blue;
+  background: darkturquoise;
   border: 0;
   border-radius: 3px;
   color: #fff;
@@ -477,7 +477,7 @@ button {
 }
 /* line 26, ../../../app/stylesheets/component/form/_button.scss */
 .button:hover, .button:focus {
-  background: #3333ff;
+  background: #00e7eb;
   text-decoration: none;
 }
 /* line 32, ../../../app/stylesheets/component/form/_button.scss */
@@ -489,7 +489,7 @@ button {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
   filter: alpha(opacity=30);
   opacity: 0.3;
-  background: blue;
+  background: darkturquoise;
   cursor: default;
 }
 

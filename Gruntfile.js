@@ -2,6 +2,7 @@ module.exports = function (grunt) {
   'use strict';
 
   require('load-grunt-tasks')(grunt);
+  require('time-grunt')(grunt);
 
   var sourcePath = 'app/',
     destPath = 'public/',
@@ -173,10 +174,19 @@ module.exports = function (grunt) {
       src: ['**']
     },
 
+    notify: {
+      sass: {
+        options: {
+          title: 'Task complete',
+          message: 'sass task complete'
+        }
+      }
+    },
+
     secret: grunt.file.exists('secret.json') ? grunt.file.readJSON('secret.json') : {},
 
     sftp: {
-      test: {
+      staging: {
         files: {
           './': [
             'public/**'
@@ -217,14 +227,17 @@ module.exports = function (grunt) {
       },
       scripts: {
         files: javascripts,
-        tasks: ['jshint', 'concat']
+        tasks: ['javascripts']
       },
       sass: {
         options: {
           livereload: false
         },
-        files: stylesheets,
-        tasks: ['sass']
+        files: [
+        stylesheets,
+        '!' + sourcePath + 'stylesheets/vendor/**/*.scss'
+        ],
+        tasks: ['stylesheets']
       },
       css: {
         files: destPath + 'assets/**/*.css',
@@ -235,15 +248,15 @@ module.exports = function (grunt) {
         sourcePath + 'jekyll/**/*.html',
         '!' + sourcePath + 'jekyll/_site/**/*.html'
         ],
-        tasks: ['jekyll', 'copy:jekyll']
+        tasks: ['html']
       },
       icons: {
         files: icons,
-        tasks: ['webfont']
+        tasks: ['newer:webfont']
       },
       images: {
         files: sourcePath + 'images/sprite/**/*.{jpg,gif,png}',
-        tasks: ['sprite', 'imagemin:layout']
+        tasks: ['newer:sprite', 'newer:imagemin']
       },
       responsive_images: {
         files: sourcePath + 'images/responsive/**/*.{jpg,gif,png}',
@@ -254,9 +267,24 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['watch']);
 
-  grunt.registerTask('dev', [
-    'jshint',
-    'copy:jekyll',
-    'htmllint'
+  grunt.registerTask('javascripts', [
+    'newer:jshint',
+    'concat',
+    'uglify'
+  ]);
+
+  grunt.registerTask('stylesheets', [
+    'sass'
+  ]);
+
+  grunt.registerTask('html', [
+    'jekyll',
+    'copy:jekyll'
+  ]);
+
+  grunt.registerTask('build', [
+    'javascripts',
+    'stylesheets',
+    'html'
   ]);
 };
