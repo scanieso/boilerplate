@@ -12,13 +12,12 @@
 @import "base/helpers";
 
 @import "base/animations";
-@import "base/grid";
+// @import "base/grid";
 @import "base/typography";
-
-@import "component/form/button";
-@import "component/form/input";
-@import "component/form/select";
-@import "component/table";
+@import "base/form/button";
+@import "base/form/input";
+@import "base/form/select";
+@import "base/table";
 
 @import "layout/footer";
 @import "layout/form";

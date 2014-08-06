@@ -20,9 +20,9 @@ $grid-classes: ();
   @include clearfix;
   margin-left: -$grid-spacing;
 
-  #{$grid-classes} {
-    @include box-sizing(border-box);
-    float: left;
-    padding-left: $grid-spacing;
-  }
+  // #{$grid-classes} {
+  //   @include box-sizing(border-box);
+  //   float: left;
+  //   padding-left: $grid-spacing;
+  // }
 }

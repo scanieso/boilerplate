@@ -156,6 +156,14 @@ module.exports = function (grunt) {
     // Misc Tasks
     // ---------------------------------------------
 
+    broccoli: {
+      dist: {
+        dest: 'public',
+        config: 'Brocfile.js',
+        port: 4200
+      }
+    },
+
     copy: {
       jekyll: {
         files: [{
