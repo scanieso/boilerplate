@@ -1,10 +1,9 @@
 .input-text,
-#{$all-text-inputs},
 textarea {
   @include box-sizing(border-box);
   @include transition(all 0.2s);
   border: 1px solid $gray;
-  border-radius: $page-border-radius;
+  border-radius: 2px;
   color: inherit;
   display: inline-block;
   font-family: inherit;
@@ -27,7 +26,7 @@ textarea {
 }
 
 @include placeholder {
-  line-height: 1.4;
+  // line-height: 1.4;
 }
 
 ::-webkit-outer-spin-button,
@@ -39,5 +38,6 @@ textarea {
 textarea {
   overflow: auto;
   max-width: 100%;
+  resize: vertical;
   vertical-align: top;
 }

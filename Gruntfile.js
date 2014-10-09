@@ -4,36 +4,59 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
 
-  var sourcePath = 'app/',
-    destPath = 'public/',
-    javascripts = sourcePath + 'javascripts/**/*.js',
-    stylesheets = sourcePath + 'stylesheets/**/*.scss',
-    icons = sourcePath + 'svg/**/*.svg',
-    images = sourcePath + 'images/**/*.{jpg,gif,png}';
+  var _src = 'app/',
+    _dest = 'public/',
+    javascripts = _src + 'javascripts/**/*.js',
+    stylesheets = _src + 'stylesheets/**/*.scss',
+    icons = _src + 'svg/**/*.svg',
+    images = _src + 'images/**/*.{jpg,gif,png}';
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    destPath: destPath,
-    sourcePath: sourcePath,
+    _dest: _dest,
+    _src: _src,
 
     // Javascript Tasks
     // ---------------------------------------------
 
+    es6transpiler: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: _src + 'javascripts/es6/',
+          src: ['**/*.js'],
+          dest: 'tmp/javascripts/_es5'
+        }]
+      }
+    },
+
+    transpile: {
+      main: {
+        type: 'globals',
+        files: [{
+          expand: true,
+          cwd: 'tmp/javascripts/_es5',
+          src: ['**/*.js'],
+          dest: _src + 'javascripts/_es5'
+        }]
+      }
+    },
+
     jshint: {
-      dev: [
-      javascripts,
-      '!' + sourcePath + 'javascripts/vendor/**/*.js'
-      ]
+      options: {
+        jshintrc: './.jshintrc'
+      },
+      dev: [_src + 'javascripts/_es5']
     },
 
     concat: {
       dev: {
         src: [
-        sourcePath + 'javascripts/vendor/**/*.js',
-        javascripts
+        _src + 'javascripts/vendor/**/*.js',
+        _src + 'javascripts/_es5/**/*.js'
         ],
-        dest: destPath + 'assets/js/app.js',
+        dest: _dest + 'assets/js/app.js',
         separator: ';'
       }
     },
@@ -41,10 +64,10 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         src: [
-        sourcePath + 'javascripts/vendor/**/*.js',
-        javascripts
+        _src + 'javascripts/vendor/**/*.js',
+        _src + 'javascripts/_es5/**/*.js'
         ],
-        dest: destPath + 'assets/js/app.min.js'
+        dest: _dest + 'assets/js/app.min.js'
       }
     },
 
@@ -58,7 +81,7 @@ module.exports = function (grunt) {
           style: 'expanded'
         },
         files: {
-          "<%= destPath + 'assets/css/styles.dev.css' %>": "<%= sourcePath + 'stylesheets/styles.scss' %>"
+          "<%= _dest + 'assets/css/styles.dev.css' %>": "<%= _src + 'stylesheets/styles.scss' %>"
         }
       },
       dist: {
@@ -67,7 +90,7 @@ module.exports = function (grunt) {
           quiet: true
         },
         files: {
-          "<%= destPath + 'assets/css/styles.css' %>": "<%= sourcePath + 'stylesheets/styles.scss' %>"
+          "<%= _dest + 'assets/css/styles.css' %>": "<%= _src + 'stylesheets/styles.scss' %>"
         }
       },
       min: {
@@ -76,7 +99,7 @@ module.exports = function (grunt) {
           quiet: true
         },
         files: {
-          "<%= destPath + 'assets/css/styles.min.css' %>": "<%= sourcePath + 'stylesheets/styles.scss' %>"
+          "<%= _dest + 'assets/css/styles.min.css' %>": "<%= _src + 'stylesheets/styles.scss' %>"
         }
       }
     },
@@ -87,14 +110,14 @@ module.exports = function (grunt) {
     jekyll: {
       dev: {
         options: {
-          src: sourcePath + 'jekyll',
-          dest: sourcePath + 'jekyll/_site'
+          src: _src + 'jekyll',
+          dest: 'tmp/_site'
         }
       }
     },
 
     htmllint: {
-      all: [destPath + '**/*.html']
+      all: [_dest + '**/*.html']
     },
 
     // Image Tasks
@@ -103,9 +126,9 @@ module.exports = function (grunt) {
     sprite: {
       all: {
         algorithm: 'binary-tree',
-        src: sourcePath + 'images/sprite/*.{jpg,gif,png}',
-        destImg: destPath + 'assets/images/layout/sprite.png',
-        destCSS: sourcePath + 'stylesheets/generated/_sprite.scss',
+        src: _src + 'images/sprite/*.{jpg,gif,png}',
+        destImg: _dest + 'assets/images/layout/sprite.png',
+        destCSS: _src + 'stylesheets/generated/_sprite.scss',
         imgPath: '../images/layout/sprite.png'
       }
     },
@@ -125,8 +148,8 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           src: ['*.{jpg,gif,png}'],
-          cwd: sourcePath + 'images/responsive',
-          dest: destPath + 'assets/images/content/'
+          cwd: _src + 'images/responsive',
+          dest: _dest + 'assets/images/content/'
         }]
       }
     },
@@ -137,8 +160,8 @@ module.exports = function (grunt) {
         windowsTile: false
       },
       icons: {
-        src: sourcePath + 'images/icons/favicon.png',
-        dest: destPath + 'assets/images/icons/'
+        src: _src + 'images/icons/favicon.png',
+        dest: _dest + 'assets/images/icons/'
       }
     },
 
@@ -146,9 +169,9 @@ module.exports = function (grunt) {
       all: {
         files: [{
           expand: true,
-          cwd: destPath + 'assets/images/',
+          cwd: _dest + 'assets/images/',
           src: ['**/*.{jpg,gif,png}'],
-          dest: destPath + 'assets/images/'
+          dest: _dest + 'assets/images/'
         }]
       }
     },
@@ -156,13 +179,21 @@ module.exports = function (grunt) {
     // Misc Tasks
     // ---------------------------------------------
 
+    clean: {
+      javascripts: [
+      _src + 'javascripts/_es5',
+      'tmp/javascripts/**/*.js'
+      ]
+    },
+
+
     copy: {
       jekyll: {
         files: [{
           expand: true,
-          cwd: sourcePath + 'jekyll/_site',
+          cwd: 'tmp/_site',
           src: ['**/*.html'],
-          dest: destPath
+          dest: _dest
         }]
       }
     },
@@ -172,15 +203,6 @@ module.exports = function (grunt) {
         base: 'public'
       },
       src: ['**']
-    },
-
-    notify: {
-      sass: {
-        options: {
-          title: 'Task complete',
-          message: 'sass task complete'
-        }
-      }
     },
 
     secret: grunt.file.exists('secret.json') ? grunt.file.readJSON('secret.json') : {},
@@ -209,8 +231,8 @@ module.exports = function (grunt) {
     webfont: {
       icons: {
         src: icons,
-        dest: destPath + 'assets/fonts/icons',
-        destCss: sourcePath + 'stylesheets/generated',
+        dest: _dest + 'assets/fonts/icons',
+        destCss: _src + 'stylesheets/generated',
         options: {
           font: 'icons',
           htmlDemo: false,
@@ -235,18 +257,18 @@ module.exports = function (grunt) {
         },
         files: [
         stylesheets,
-        '!' + sourcePath + 'stylesheets/vendor/**/*.scss'
+        '!' + _src + 'stylesheets/vendor/**/*.scss'
         ],
         tasks: ['stylesheets']
       },
       css: {
-        files: destPath + 'assets/**/*.css',
+        files: _dest + 'assets/**/*.css',
         tasks: []
       },
       jekyll: {
         files: [
-        sourcePath + 'jekyll/**/*.html',
-        '!' + sourcePath + 'jekyll/_site/**/*.html'
+        _src + 'jekyll/**/*.html',
+        '!' + _src + 'jekyll/_site/**/*.html'
         ],
         tasks: ['html']
       },
@@ -254,12 +276,16 @@ module.exports = function (grunt) {
         files: icons,
         tasks: ['newer:webfont']
       },
+      sprites: {
+        files: _src + 'images/sprite/**/*.{jpg,gif,png}',
+        tasks: ['sprite']
+      },
       images: {
-        files: sourcePath + 'images/sprite/**/*.{jpg,gif,png}',
-        tasks: ['newer:sprite', 'newer:imagemin']
+        files: _dest + 'images/**/*.{jpg,gif.png}',
+        tasks: ['imagemin']
       },
       responsive_images: {
-        files: sourcePath + 'images/responsive/**/*.{jpg,gif,png}',
+        files: _src + 'images/responsive/**/*.{jpg,gif,png}',
         tasks: ['responsive_images', 'copy:responsive_images', 'imagemin:responsive_images']
       }
     }
@@ -268,7 +294,10 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['watch']);
 
   grunt.registerTask('javascripts', [
-    'newer:jshint',
+    'clean:javascripts',
+    'es6transpiler',
+    'transpile',
+    'jshint',
     'concat',
     'uglify'
   ]);

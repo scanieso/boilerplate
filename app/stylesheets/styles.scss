@@ -1,12 +1,14 @@
 /*
-  New Project CSS
+  Boilerplate CSS
 */
 
 @charset "UTF-8";
 
-@import "vendor/bourbon/bourbon";
+$em-base: 16;
 
-@import "base/reset";
+@import "./bower_components/bourbon/dist/bourbon";
+@import "./bower_components/normalize/normalize";
+
 @import "base/variables";
 @import "base/mixins";
 @import "base/helpers";

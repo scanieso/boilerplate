@@ -1,0 +1,16 @@
+{
+  "name": "boilerplate",
+  "version": "0.0.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bourbon": "3.2.1",
+    "normalize": "modularized-normalize-scss#~3.0.1"
+  }
+}

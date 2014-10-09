@@ -6,11 +6,10 @@ button {
 
 .button {
   @include box-sizing(border-box);
-  @include font-size(14);
   @include transition(background 0.2s);
   background: $color-primary;
-  border: 0;
-  border-radius: $page-border-radius;
+  border: 1px solid;
+  border-radius: 100%;
   color: #fff;
   cursor: pointer;
   display: inline-block;
@@ -25,7 +24,6 @@ button {
 
   &:hover,
   &:focus {
-    background: lighten($color-primary, 5%);
     text-decoration: none;
   }
 
@@ -33,7 +31,6 @@ button {
     box-shadow: inset 0 2px 5px rgba(#000, 0.1);
   }
 
-  &.disabled,
   &[disabled] {
     @include opacity(0.3);
     background: $color-primary;
