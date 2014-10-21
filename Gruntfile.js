@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 
   var _src = 'app/',
     _dest = 'public/',
-    javascripts = _src + 'javascripts/**/*.js',
+    javascripts = [_src + 'javascripts/_es5/**/*.js'],
     stylesheets = _src + 'stylesheets/**/*.scss',
     icons = _src + 'svg/**/*.svg',
     images = _src + 'images/**/*.{jpg,gif,png}';
@@ -52,10 +52,7 @@ module.exports = function (grunt) {
 
     concat: {
       dev: {
-        src: [
-        _src + 'javascripts/vendor/**/*.js',
-        _src + 'javascripts/_es5/**/*.js'
-        ],
+        src: [javascripts],
         dest: _dest + 'assets/js/app.js',
         separator: ';'
       }
@@ -63,10 +60,7 @@ module.exports = function (grunt) {
 
     uglify: {
       dist: {
-        src: [
-        _src + 'javascripts/vendor/**/*.js',
-        _src + 'javascripts/_es5/**/*.js'
-        ],
+        src: [javascripts],
         dest: _dest + 'assets/js/app.min.js'
       }
     },
@@ -77,17 +71,7 @@ module.exports = function (grunt) {
     sass: {
       dev: {
         options: {
-          lineNumbers: true,
-          style: 'expanded'
-        },
-        files: {
-          "<%= _dest + 'assets/css/styles.dev.css' %>": "<%= _src + 'stylesheets/styles.scss' %>"
-        }
-      },
-      dist: {
-        options: {
-          style: 'nested',
-          quiet: true
+          outputStyle: 'nested'
         },
         files: {
           "<%= _dest + 'assets/css/styles.css' %>": "<%= _src + 'stylesheets/styles.scss' %>"
@@ -95,8 +79,7 @@ module.exports = function (grunt) {
       },
       min: {
         options: {
-          style: 'compressed',
-          quiet: true
+          outputStyle: 'compressed'
         },
         files: {
           "<%= _dest + 'assets/css/styles.min.css' %>": "<%= _src + 'stylesheets/styles.scss' %>"
@@ -186,6 +169,16 @@ module.exports = function (grunt) {
       ]
     },
 
+    connect: {
+      server: {
+        options: {
+          base: 'public/',
+          hostname: '*',
+          livereload: true,
+          port: 8000
+        }
+      }
+    },
 
     copy: {
       jekyll: {
@@ -215,7 +208,7 @@ module.exports = function (grunt) {
           ]
         },
         options: {
-          path: '/sandbox.ftsdesign.com/web/content/grunt/',
+          path: '<%= secret.path %>',
           host: '<%= secret.host %>',
           username: '<%= secret.username %>',
           password: '<%= secret.password %>',
@@ -247,9 +240,16 @@ module.exports = function (grunt) {
       options: {
         livereload: true
       },
-      scripts: {
-        files: javascripts,
+      sourceScripts: {
+        options: {
+          livereload: false
+        },
+        files: _src + 'javascripts/**/*.js',
         tasks: ['javascripts']
+      },
+      compiledScripts: {
+        files: _dest + 'assets/js/**/*.js',
+        tasks: []
       },
       sass: {
         options: {
@@ -266,10 +266,7 @@ module.exports = function (grunt) {
         tasks: []
       },
       jekyll: {
-        files: [
-        _src + 'jekyll/**/*.html',
-        '!' + _src + 'jekyll/_site/**/*.html'
-        ],
+        files: _src + 'jekyll/**/*.html',
         tasks: ['html']
       },
       icons: {
@@ -291,7 +288,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['connect', 'watch']);
 
   grunt.registerTask('javascripts', [
     'clean:javascripts',
