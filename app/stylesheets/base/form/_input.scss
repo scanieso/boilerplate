@@ -1,32 +1,33 @@
-.input-text,
-textarea {
+input {
   @include box-sizing(border-box);
+  -webkit-font-smoothing: antialiased;
+  font-family: inherit;
+  font-size: 100%;
+  max-width: 100%;
+}
+
+.input-text {
   @include transition(all 0.2s);
-  border: 1px solid $gray;
+  background: $color-neutral-dark;
+  border: 1px solid transparent;
+  border-top: 3px solid $color-neutral-darker;
   border-radius: 2px;
   color: inherit;
   display: inline-block;
-  font-family: inherit;
-  font-size: 100%;
   margin: 0;
   padding: 3px 10px;
   vertical-align: middle;
-  -webkit-font-smoothing: antialiased;
-  width: 100%;
 
   &:focus {
-    box-shadow: 0 0 3px $gray;
     outline: none;
   }
 
   &[disabled] {
-    color: $gray;
-    opacity: 0.5;
+    opacity: 0.3;
   }
 }
 
 @include placeholder {
-  // line-height: 1.4;
 }
 
 ::-webkit-outer-spin-button,

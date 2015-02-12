@@ -11,19 +11,20 @@ $em-base: 16;
 
 @import "base/variables";
 @import "base/mixins";
-@import "base/helpers";
 
 @import "base/animations";
+@import "base/form/button";
+@import "base/form/input";
+@import "base/form/select";
+@import "base/helpers";
 @import "base/grid";
+@import "base/table";
 @import "base/typography";
 
-@import "component/form/button";
-@import "component/form/input";
-@import "component/form/select";
-@import "component/table";
+@import "module/footer";
+@import "module/form";
+@import "module/header";
+@import "module/section";
 
-@import "layout/footer";
-@import "layout/form";
 @import "layout/global";
-@import "layout/header";
-@import "layout/section";
+@import "layout/z-index";

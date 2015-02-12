@@ -119,6 +119,7 @@ module.exports = function (grunt) {
     responsive_images: {
       responsive: {
         options: {
+          newFilesOnly: true,
           separator: '_',
           sizes: [{
             name: 'mobile',
@@ -188,6 +189,14 @@ module.exports = function (grunt) {
           src: ['**/*.html'],
           dest: _dest
         }]
+      },
+      responsive_images: {
+        files: [{
+          expand: true,
+          cwd: _src + 'images/responsive/',
+          src: ['**/*.{jpg,gif,png}'],
+          dest: _dest + 'assets/images/content'
+        }]
       }
     },
 
@@ -208,8 +217,8 @@ module.exports = function (grunt) {
           ]
         },
         options: {
-          path: '<%= secret.path %>',
           host: '<%= secret.host %>',
+          path: '<%= secret.path %>',
           username: '<%= secret.username %>',
           password: '<%= secret.password %>',
           minimatch: {
@@ -301,6 +310,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('stylesheets', [
     'sass'
+  ]);
+
+  grunt.registerTask('images', [
+    'responsive_images',
+    'copy:responsive_images'
+    'imagemin'
   ]);
 
   grunt.registerTask('html', [
