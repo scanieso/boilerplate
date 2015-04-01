@@ -2,8 +2,8 @@
 // ---------------------------------------
 
 @mixin opacity ($value) {
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$value * 100})";
-  filter: alpha(opacity=#{$value * 100});
+  // -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$value * 100})";
+  // filter: alpha(opacity=#{$value * 100});
   opacity: $value;
 }
 
@@ -34,6 +34,11 @@
   left: -9999px;
   position: absolute;
   top: -9999px;
+}
+
+@mixin icon ($icon) {
+  @extend [class^="icon-"]:before;
+  @extend .icon-#{$icon}:before;
 }
 
 @mixin image-replaced {
@@ -68,6 +73,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@mixin vertical-center () {
+  @include transform(translateY(-50%));
+  position: relative;
+  top: 50%;
 }
 
 @mixin vertical-rhythm ($value: $spacing-vertical) {
