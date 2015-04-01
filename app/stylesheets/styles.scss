@@ -11,6 +11,7 @@ $em-base: 16;
 
 @import "base/variables";
 @import "base/mixins";
+@import "base/responsive";
 
 @import "base/animations";
 @import "base/form/button";
@@ -18,7 +19,6 @@ $em-base: 16;
 @import "base/form/select";
 @import "base/helpers";
 @import "base/grid";
-@import "base/media";
 @import "base/table";
 @import "base/typography";
 
