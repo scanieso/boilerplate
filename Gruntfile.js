@@ -103,6 +103,24 @@ module.exports = function (grunt) {
       all: [_dest + '**/*.html']
     },
 
+    prettify: {
+      options: {
+        condense: false,
+        max_preserve_newlines: 2,
+        unformatted: [
+        'code',
+        'pre'
+        ]
+      },
+      all: {
+        expand: true,
+        cwd: 'tmp/_site',
+        ext: '.html',
+        src: ['*.html'],
+        dest: _dest
+      }
+    },
+
     // Image Tasks
     // ---------------------------------------------
 
@@ -323,7 +341,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('html', [
     'jekyll',
-    'copy:jekyll'
+    'prettify'
   ]);
 
   grunt.registerTask('build', [
