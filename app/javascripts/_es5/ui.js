@@ -2,12 +2,15 @@
   "use strict";
   var ns = __dependency1__;
 
-  ns.UI = function()  {
-    var self = {};
+  ns.UI = function () {
+    var initialize;
 
-    self.initialize = function() 
-      {return console.log('Initialize: ui.js')};
+    initialize = function () {
+      console.log('Initialize: ui.js');
+    };
 
-    return self;
+    return {
+      initialize: initialize
+    };
   };
 })(window.App);

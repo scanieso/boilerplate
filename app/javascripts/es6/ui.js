@@ -1,10 +1,13 @@
 import ns from 'App';
 
-ns.UI = () => {
-  let self = {};
+ns.UI = function () {
+  var initialize;
 
-  self.initialize = () =>
+  initialize = function () {
     console.log('Initialize: ui.js');
+  };
 
-  return self;
+  return {
+    initialize: initialize
+  };
 };

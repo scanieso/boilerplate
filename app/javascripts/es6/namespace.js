@@ -1,8 +1,8 @@
 import $ from 'jQuery';
 
-let App = {
+var App = {
   initialize: function () {
-    let ui = new App.UI();
+    var ui = new App.UI();
     ui.initialize();
   }
 };

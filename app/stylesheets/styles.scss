@@ -14,18 +14,20 @@ $em-base: 16;
 @import "base/responsive";
 
 @import "base/animations";
-@import "base/form/button";
-@import "base/form/input";
-@import "base/form/select";
 @import "base/helpers";
+@import "base/icons";
 @import "base/grid";
-@import "base/table";
 @import "base/typography";
 
 @import "module/footer";
 @import "module/form";
+@import "module/form/button";
+@import "module/form/input";
+@import "module/form/select";
 @import "module/header";
+@import "module/media";
 @import "module/section";
+@import "module/table";
 
 @import "layout/global";
 @import "layout/z-index";

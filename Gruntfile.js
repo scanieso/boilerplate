@@ -297,7 +297,10 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default', ['connect', 'watch']);
+  grunt.registerTask('default', ['watch']);
+
+  grunt.registerTask('server', ['connect', 'watch']);
+  grunt.registerTask('s', ['server']);
 
   grunt.registerTask('javascripts', [
     'clean:javascripts',
@@ -314,7 +317,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('images', [
     'responsive_images',
-    'copy:responsive_images'
+    'copy:responsive_images',
     'imagemin'
   ]);
 

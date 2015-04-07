@@ -39,7 +39,7 @@ File / folder | Purpose
 
 ## Build
 
-Uses [Grunt](http://gruntjs.com/). Default task runs `connect` and `watch`.
+Uses [Grunt](http://gruntjs.com/). Default task runs `watch`.
 
     $ bower install
     $ npm install

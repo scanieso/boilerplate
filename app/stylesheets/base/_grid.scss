@@ -43,7 +43,9 @@ $grid-classes: ();
 .row {
   @include grid-row;
 
-  #{$grid-classes} {
-    @include grid-column;
+  > {
+    #{$grid-classes} {
+      @include grid-column;
+    }
   }
 }

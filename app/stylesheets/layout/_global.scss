@@ -24,6 +24,7 @@ body {
 .container {
   margin: auto;
   max-width: $page-width;
+  min-width: 320px;
   padding: 0 $spacing-horizontal;
 }
 

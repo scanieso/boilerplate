@@ -1,16 +1,18 @@
 input {
-  @include box-sizing(border-box);
   -webkit-font-smoothing: antialiased;
   font-family: inherit;
   font-size: 100%;
   max-width: 100%;
 }
 
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .input-text {
   @include transition(all 0.2s);
-  background: $color-neutral-dark;
-  border: 1px solid transparent;
-  border-top: 3px solid $color-neutral-darker;
+  background: #fff;
+  border: 1px solid $gray;
   border-radius: 2px;
   color: inherit;
   display: inline-block;

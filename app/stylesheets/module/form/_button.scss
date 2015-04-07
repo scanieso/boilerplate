@@ -5,7 +5,6 @@ button {
 }
 
 .button {
-  @include box-sizing(border-box);
   @include transition(background 0.2s);
   background: $color-primary;
   border: 1px solid;
