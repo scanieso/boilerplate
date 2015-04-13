@@ -1,10 +1,10 @@
 // CSS3
 // ---------------------------------------
 
-@mixin opacity ($value) {
-  // -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$value * 100})";
-  // filter: alpha(opacity=#{$value * 100});
-  opacity: $value;
+@mixin opacity ($opacity) {
+  $opacityPercent: ($opacity * 100);
+  filter: alpha(opacity=$opacityPercent);
+  opacity: $opacity;
 }
 
 @mixin placeholder () {
