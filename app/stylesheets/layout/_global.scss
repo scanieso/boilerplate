@@ -21,6 +21,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.skip-link {
+  background: $color-primary;
+  color: #fff;
+  position: absolute;
+  top: -100%;
+
+  &:focus {
+    top: 0;
+  }
+}
+
 .container {
   margin: auto;
   max-width: $page-width;
