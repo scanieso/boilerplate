@@ -158,6 +158,7 @@ module.exports = function (grunt) {
 
     favicons: {
       options: {
+        appleTouchBackgroundColor: '#fff',
         tileBlackWhite: false,
         windowsTile: false
       },

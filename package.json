@@ -14,7 +14,7 @@
     "grunt-contrib-watch": "^0.5.3",
     "grunt-es6-module-transpiler": "~0.6.0",
     "grunt-es6-transpiler": "~1.0.1",
-    "grunt-favicons": "~0.6.4",
+    "grunt-favicons": "~0.7.0",
     "grunt-gh-pages": "^0.9.1",
     "grunt-html": "^4.0.1",
     "grunt-jekyll": "~0.4.0",
