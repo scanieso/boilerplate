@@ -1,0 +1,13 @@
+// List elements with z-index here
+// lowest to highest
+$z-indices:
+  // ".skip-link"
+  ;
+
+@for $i from 1 to length($z-indices) + 1 {
+  $selector: nth($z-indices, $i);
+
+  #{$selector} {
+    z-index: $i * 100;
+  }
+}

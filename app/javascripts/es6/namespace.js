@@ -1,13 +1,13 @@
 import $ from 'jQuery';
 
-var App = {
-  initialize: function () {
-    var ui = new App.UI();
+const App = {
+  initialize() {
+    const ui = new App.UI();
     ui.initialize();
   }
 };
 
-$(function () {
+$(function() {
   App.initialize();
 });
 

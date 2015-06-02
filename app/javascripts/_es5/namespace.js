@@ -3,13 +3,13 @@
   var $ = __dependency1__;
 
   var App = {
-    initialize: function () {
+    initialize: function() {
       var ui = new App.UI();
       ui.initialize();
     }
   };
 
-  $(function () {
+  $(function() {
     App.initialize();
   });
 
